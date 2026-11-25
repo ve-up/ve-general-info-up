@@ -1,5 +1,5 @@
 /* VE General Information – service worker (offline + background sending) */
-var VERSION = 've-geninfo-v1.6.0';
+var VERSION = 've-geninfo-v1.7.0';
 var FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
