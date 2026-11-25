@@ -1,9 +1,12 @@
 /* VE General Information – service worker (offline + background sending) */
-var VERSION = 've-geninfo-v1.7.0';
+var VERSION = 've-geninfo-v1.7.1';
 var FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (e) {
-  e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(FILES); }));
+  // cache:'reload' = always download fresh files from the server, never a copy the browser kept earlier
+  e.waitUntil(caches.open(VERSION).then(function (c) {
+    return c.addAll(FILES.map(function (f) { return new Request(f, { cache: 'reload' }); }));
+  }));
 });
 self.addEventListener('activate', function (e) {
   e.waitUntil(caches.keys().then(function (ks) {
